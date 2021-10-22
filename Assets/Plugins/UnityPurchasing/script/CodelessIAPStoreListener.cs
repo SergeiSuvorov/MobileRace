@@ -207,7 +207,7 @@ namespace UnityEngine.Purchasing
                                  "\". Add an active IAPButton to process this purchase, or add an IAPListener to receive any unhandled purchase events.");
 
             }
-
+            Debug.Log(consumePurchase);
             return (consumePurchase) ? PurchaseProcessingResult.Complete : PurchaseProcessingResult.Pending;
         }
 

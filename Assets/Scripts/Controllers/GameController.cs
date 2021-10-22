@@ -1,4 +1,5 @@
-﻿using Profile;
+﻿using Model;
+
 using Tools;
 
 public class GameController : BaseController
