@@ -95,8 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -35.68
-  _rightBorder: 35.68
   _relativeSpeedRate: 1
 --- !u!1 &2568450156852823711
 GameObject:
@@ -193,8 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -30.64
-  _rightBorder: 30.64
   _relativeSpeedRate: 0.3
 --- !u!1 &2807479611546755954
 GameObject:
@@ -342,8 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -35.68
-  _rightBorder: 35.68
   _relativeSpeedRate: 1
 --- !u!1 &3590461184429166328
 GameObject:
@@ -440,8 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -35.68
-  _rightBorder: 35.68
   _relativeSpeedRate: 1
 --- !u!1 &5625024096290961257
 GameObject:
@@ -469,7 +461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5625024096290961257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.64, y: 1.3, z: 0}
+  m_LocalPosition: {x: 30.7, y: 1.3, z: 0}
   m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7374595844525518469}
@@ -538,8 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -30.64
-  _rightBorder: 30.64
   _relativeSpeedRate: 0.3
 --- !u!1 &7039704320274304650
 GameObject:
@@ -567,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7039704320274304650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.64, y: 1.3, z: 0}
+  m_LocalPosition: {x: -30.7, y: 1.3, z: 0}
   m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7374595844525518469}
@@ -636,8 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -30.64
-  _rightBorder: 30.64
   _relativeSpeedRate: 0.3
 --- !u!1 &8833280361136734726
 GameObject:
