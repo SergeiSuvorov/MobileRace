@@ -13,15 +13,16 @@ namespace Ui
 
         [SerializeField] private Button _creditPackButton;
         [SerializeField] private Button _bigCreditPackButton;
+        [SerializeField] private Button _garageButton;
 
         private UnityAction<string> _purchaseReqested; 
-        public void Init(UnityAction startGame, UnityAction rewardAdRequested,UnityAction<string> purchaseReqested)
+        public void Init(UnityAction startGame, UnityAction rewardAdRequested,UnityAction<string> purchaseReqested, UnityAction openGarage)
         {
             _buttonStart.onClick.AddListener(startGame);
             _showRewardedButton?.onClick.AddListener(rewardAdRequested);
             
             _purchaseReqested = purchaseReqested;
-
+            _garageButton?.onClick.AddListener(openGarage);
             _creditPackButton?.onClick.AddListener(onCreditPackButtonClick);
             _bigCreditPackButton?.onClick.AddListener(onBigCreditPackButtonClick);
         }
@@ -48,8 +49,11 @@ namespace Ui
         }
         protected void OnDestroy()
         {
-            _buttonStart.onClick.RemoveAllListeners();
-            _showRewardedButton.onClick.RemoveAllListeners();
+            _buttonStart.onClick?.RemoveAllListeners();
+            _showRewardedButton?.onClick.RemoveAllListeners();
+            _garageButton?.onClick.RemoveAllListeners();
+            _creditPackButton?.onClick.RemoveAllListeners();
+            _bigCreditPackButton?.onClick.RemoveAllListeners();
         }
     }
 }
