@@ -3,7 +3,7 @@
 namespace Inventory
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item")]
-    public class ItemConfig : ScriptableObject
+    public class ItemConfig : ScriptableObject, IUnique<int>
     {
         [SerializeField]
         private int _id;

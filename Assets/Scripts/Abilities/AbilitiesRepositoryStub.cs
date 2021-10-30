@@ -2,5 +2,5 @@
 
 public class AbilitiesRepositoryStub: IAbilityRepository
 {
-    public IReadOnlyDictionary<int, IAbility> AbilityMapById { get; } = new Dictionary<int, IAbility>();
+    public IReadOnlyDictionary<int, IAbility> Content { get; } = new Dictionary<int, IAbility>();
 }

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class TrailTouchView : TrailView
 {
-    protected override void TrailMoving()
+    protected override void onUpdate()
     {
         if (Input.touchCount > 0)
         {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            transform.position = pos;
+            SetTrailPossition(Input.GetTouch(0).position);
 
             Touch touch = Input.GetTouch(0);
             switch (touch.phase)

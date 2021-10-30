@@ -15,7 +15,7 @@ namespace Items
 
         public IUpgradableCar Upgrade(IUpgradableCar upgradableCar)
         {
-            upgradableCar.Speed += _speed;
+            upgradableCar.Speed.Value += _speed;
             upgradableCar.SetDetail(_detailConfig);
             return upgradableCar;
         }
