@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Tools;
 
 namespace Items
 {
-    public interface IItemsRepository
+    public interface IItemsRepository: IRepository<int, IItem>
     {
-        IReadOnlyDictionary<int, IItem> Items { get; }
+
     }
 }
 

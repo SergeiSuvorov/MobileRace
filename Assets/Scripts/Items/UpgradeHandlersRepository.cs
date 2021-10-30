@@ -5,37 +5,13 @@ using Inventory;
 
 namespace Items
 {
-    public class UpgradeHandlersRepository : BaseController
+    public class UpgradeHandlersRepository : BaseRepositoty<int, IUpgradeCarHandler, UpgradeItemConfig>
     {
-        public IReadOnlyDictionary<int, IUpgradeCarHandler> UpgradeItems => _upgradeItemsMapById;
-        private Dictionary<int, IUpgradeCarHandler> _upgradeItemsMapById = new Dictionary<int, IUpgradeCarHandler>();
-
-        public UpgradeHandlersRepository(
-            List<UpgradeItemConfig> upgradeItemConfigs)
+        public UpgradeHandlersRepository(List<UpgradeItemConfig> configs) : base(configs)
         {
-            PopulateItems(ref _upgradeItemsMapById, upgradeItemConfigs);
-        }
-  
-        protected override void OnDispose()
-        {
-            _upgradeItemsMapById.Clear();
-            _upgradeItemsMapById = null;
         }
 
-        private void PopulateItems(
-            ref Dictionary<int, IUpgradeCarHandler> upgradeHandlersMapByType,
-            List<UpgradeItemConfig> configs)
-        {
-            foreach (var config in configs)
-            {
-                if (upgradeHandlersMapByType.ContainsKey(config.Id)) 
-                    continue;
-                
-                upgradeHandlersMapByType.Add(config.Id, CreateHandlerByType(config));
-            }
-        }
-
-        private IUpgradeCarHandler CreateHandlerByType(UpgradeItemConfig config)
+        protected override IUpgradeCarHandler CreateValue(UpgradeItemConfig config)
         {
             switch (config.UpgradeType)
             {
@@ -45,6 +21,7 @@ namespace Items
                     return StubUpgradeCarHandler.Default;
             }
         }
+
     }
 }
 

@@ -14,7 +14,10 @@ public class MainController : BaseController
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer,
        List<ItemConfig> itemsConfig,
        List<AbilityConfig> abilitiesConfig,
-       List<UpgradeItemConfig> upgradeItemsConfig)
+       List<UpgradeItemConfig> upgradeItemsConfig, 
+       IAdsShower adsShower,
+       List<ShopProduct> shopProducts,
+       IShop shop)
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
@@ -22,12 +25,17 @@ public class MainController : BaseController
         _abilitiesConfig = abilitiesConfig;
         _upgradeItemsConfig = upgradeItemsConfig;
         _inventoryModel = new InventoryModel();
+        Debug.Log(itemsConfig == null);
         _itemsRepository = new ItemsRepository(itemsConfig);
         _inventoryController = new InventoryController(_inventoryModel, _itemsRepository);
         _inventoryController.ShowInventory();
         AddController(_inventoryController);
+        
+        _adsShower = adsShower;
+        _shop = shop;
+        _purchaseController = new PurchaseController(shopProducts, profilePlayer, _shop);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
-        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);        
     }
 
     private MainMenuController _mainMenuController;

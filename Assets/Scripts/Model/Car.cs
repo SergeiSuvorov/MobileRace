@@ -3,6 +3,7 @@ using Inventory;
 using Items;
 using System;
 using System.Collections.Generic;
+using Tools;
 
 namespace Model
 {
@@ -10,15 +11,13 @@ namespace Model
     {
         private float _defaultSpeed;
         private Dictionary<DetailType, UpgradeItemConfig> _detailList = new Dictionary<DetailType, UpgradeItemConfig>();
-        public float Speed
-        {
-            get => _defaultSpeed;
-            set => _defaultSpeed = value;
-        }
-
+        private float _bonusSpeed=0f;
+        public SubscriptionProperty<float> Speed { get; }
+        
         public Car(float speed)
         {
-            _defaultSpeed = speed;
+            Speed = new SubscriptionProperty<float>();
+            Speed.Value = speed;
 
             int enumCount= Enum.GetNames(typeof(DetailType)).Length;
             for(int i=0;i< enumCount; i++ )
@@ -31,6 +30,15 @@ namespace Model
         {
             var key = upgradeItem.DetailType;
             _detailList[key] = upgradeItem;
+        }
+
+        public void Restore()
+        {
+            Speed.Value = _defaultSpeed;
+        }
+        public void SetSpeedBonus(float speed)
+        {
+            Speed.Value += speed;
         }
     }
 }

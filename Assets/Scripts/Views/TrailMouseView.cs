@@ -6,10 +6,10 @@ using UnityEngine;
 public class TrailMouseView : TrailView
 {
    
-    protected override void TrailMoving()
+    protected override void onUpdate()
     {
-        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = pos;
+        SetTrailPossition(Input.mousePosition);
+
         if (Input.GetMouseButtonDown(0))
         {
             gameObject.SetActive(true);

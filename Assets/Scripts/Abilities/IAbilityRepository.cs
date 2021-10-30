@@ -2,9 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
-public interface IAbilityRepository
+public interface IAbilityRepository: IRepository<int, IAbility>
 {
-    IReadOnlyDictionary<int, IAbility> AbilityMapById { get; }
 }

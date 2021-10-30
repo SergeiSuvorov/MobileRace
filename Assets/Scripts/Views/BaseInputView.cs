@@ -5,10 +5,9 @@ public abstract class BaseInputView : MonoBehaviour
 {
     private SubscriptionProperty<float> _leftMove;
     private SubscriptionProperty<float> _rightMove;
+    protected SubscriptionProperty<float> _speed;
     
-    protected float _speed;
-    
-    public virtual void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed)
+    public virtual void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, SubscriptionProperty<float> speed)
     {
         _leftMove = leftMove;
         _rightMove = rightMove;

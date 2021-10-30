@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MouseInputView : GameInputView
 {
-    
-    protected override void Move()
+    protected override void CheckInput()
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -15,16 +14,13 @@ public class MouseInputView : GameInputView
 
             if (mousePos.x > _startPosition.x)
             {
-                _curentSpeed = _curentSpeed < _speed ? (_curentSpeed + _moveAcceleration) : _speed;
+                AddAcceleration(true);
             }
-            if (mousePos.x < _startPosition.x)
+            else if (mousePos.x < _startPosition.x)
             {
-                _curentSpeed = _curentSpeed > -_speed ? (_curentSpeed - _moveAcceleration) : -_speed;
+                AddAcceleration(false);
             }
         }
-
-        base.Move();
     }
-
 }
 

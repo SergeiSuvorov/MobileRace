@@ -9,10 +9,7 @@ public class AbilitiesController : BaseController
     private readonly IAbilityRepository _abilitiesRepository;
     private readonly IAbilityCollectionView _view;
     private readonly IAbilityActivator _activator;
-    private IInventoryModel inventoryModel;
-    private IAbilityRepository abilitiesRepository;
-    private AbilityCollectionViewStub abilityCollectionViewStub;
-    private CarController carController;
+
 
     public AbilitiesController(IInventoryModel inventory, IAbilityRepository abilitiesRepository,
         IAbilityCollectionView view, IAbilityActivator activator)
@@ -24,7 +21,7 @@ public class AbilitiesController : BaseController
 
         var equiped = inventory.GetEquippedItems();
         var equipedAbilities = equiped
-            .Where(i => _abilitiesRepository.AbilityMapById.ContainsKey(i.Id));
+            .Where(i => _abilitiesRepository.Content.ContainsKey(i.Id));
 
         view.Display(equipedAbilities.ToList());
         view.UseRequested += OnAbilityRequested;
@@ -34,7 +31,13 @@ public class AbilitiesController : BaseController
 
     private void OnAbilityRequested(object sender, IItem e)
     {
-        var ability = _abilitiesRepository.AbilityMapById[e.Id];
+        var ability = _abilitiesRepository.Content[e.Id];
         ability.Apply(_activator);
+    }
+
+    protected override void OnDispose()
+    {
+        base.OnDispose();
+        _view.UseRequested -= OnAbilityRequested;
     }
 }

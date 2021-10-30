@@ -11,7 +11,7 @@ public class GameController : BaseController
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
-        var abilitiesRepository = new AbilitiesRepository(abilitiesConfig, leftMoveDiff, rightMoveDiff);
+        var abilitiesRepository = new AbilitiesRepository(abilitiesConfig);
 
         var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
         AddController(tapeBackgroundController);
@@ -19,7 +19,7 @@ public class GameController : BaseController
         var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
         AddController(inputGameController);
 
-        var carController = new CarController();
+        var carController = new CarController(profilePlayer.CurrentCar);
         AddController(carController);
 
         var abilityViews = new ButtonsAbilityController(placeForUi);

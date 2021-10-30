@@ -20,6 +20,7 @@ namespace Ui
             _adsShower = adsShower;
             _view = LoadView(placeForUi);
             _shop = shop;
+
             TrailController trail = new TrailController();
             AddController(trail);
             _view.Init(StartGame, ShowAddRequested, PurchaseRequasted, OpenGarage);
@@ -27,6 +28,16 @@ namespace Ui
             _view.UpdateCredit(_profilePlayer.CreditCount.Value);
             
         }
+
+        private BaseController ConfigureCursorTrail()
+        {
+            TrailController trailController = new TrailController();;
+            AddController(trailController);
+            return trailController;
+        }
+
+        
+
         private void OnCreditChange(int creditValue)
         {
             _view.UpdateCredit(_profilePlayer.CreditCount.Value);

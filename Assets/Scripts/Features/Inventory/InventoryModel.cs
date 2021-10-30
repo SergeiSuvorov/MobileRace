@@ -9,8 +9,6 @@ namespace Inventory
     {
         private readonly List<IItem> _items = new List<IItem>();
         
-
-
         public IReadOnlyList<IItem> GetEquippedItems()
         {
             return _items;

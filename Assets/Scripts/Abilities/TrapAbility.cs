@@ -1,4 +1,5 @@
 ﻿using System;
+using Tools;
 using UnityEngine;
 
 public class TrapAbility : IAbility
