@@ -5,7 +5,8 @@
         None,
         Start,
         Garage,
-        Game
+        Game,
+        Reward
     }
 }
 
