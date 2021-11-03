@@ -12,8 +12,8 @@ namespace Inventory
 
         public void Display(IReadOnlyList<IItem> items)
         {
-            foreach (var item in items)
-                Debug.Log($"Id Item: {item.Id}. Title Item: {item.Info.Title}");
+            //foreach (var item in items)
+                //Debug.Log($"Id Item: {item.Id}. Title Item: {item.Info.Title}");
         }
 
       
