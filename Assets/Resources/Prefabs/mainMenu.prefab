@@ -1056,6 +1056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9affb13670391548bd41525da9f9bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonClosePopup: {fileID: 7161864337447823656}
+  _duration: 1
   _buttonStart: {fileID: 315532611085353152}
   _showRewardedButton: {fileID: 7764129818148735214}
   _currentCountCredit: {fileID: 7059615596721226259}

@@ -1,8 +1,10 @@
+using Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DailyRewardController: BaseController
 {
@@ -10,20 +12,23 @@ public class DailyRewardController: BaseController
     private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/Rewards" };
     private List<ContainerSlotRewardView> _slots;
     private SubscriptionProperty<int> _credit;
-
+    private ProfilePlayer _profilePlayer;
     private bool _isGetReward;
 
-    public DailyRewardController(DailyRewardView generateLevelView)
+    public DailyRewardController(Transform placeForUI, ProfilePlayer profilePlayer, UnityAction onPopUpShow)
     {
-        _dailyRewardView = generateLevelView;
-    }
-    public DailyRewardController(Transform placeForUI, SubscriptionProperty<int> credit)
-    {
-        _credit = credit;
+        _profilePlayer = profilePlayer;
+        _credit = _profilePlayer.CreditCount;
         _dailyRewardView = LoadView(placeForUI);
-        _dailyRewardView.Init(_credit);
+        _dailyRewardView.Init(_credit, onPopUpShow, this.Dispose, onExit);
         RefreshView();
     }
+
+    public void onExit()
+    {
+        _profilePlayer.CurrentState.Value = GameState.Start;
+    }
+
     private DailyRewardView LoadView(Transform placeForUi)
     {
         Debug.Log(placeForUi);
@@ -33,26 +38,26 @@ public class DailyRewardController: BaseController
         return objectView.GetComponentInChildren<DailyRewardView>();
     }
     public void RefreshView()
-   {
+    {
        InitSlots();
       
        _dailyRewardView.StartCoroutine(RewardsStateUpdater());
       
        RefreshUi();
        SubscribeButtons();
-   }
+    }
 
    private void InitSlots()
    {
        _slots = new List<ContainerSlotRewardView>();
        
         for (var i = 0; i < _dailyRewardView.Rewards.Count; i++)
-       {
+        {
            var instanceSlot = GameObject.Instantiate(_dailyRewardView.ContainerSlotRewardView,
                _dailyRewardView.MountRootSlotsReward, false);
 
            _slots.Add(instanceSlot);
-       }
+        }
    }
 
    private IEnumerator RewardsStateUpdater()
@@ -100,19 +105,11 @@ public class DailyRewardController: BaseController
            if (_dailyRewardView.TimeGetReward != null)
            {
                var nextClaimTime = _dailyRewardView.TimeGetReward.Value.AddSeconds(_dailyRewardView.TimeCooldown);
-                Debug.Log(_dailyRewardView.TimeGetReward.Value);
-                Debug.Log(nextClaimTime);
-                Debug.Log(DateTime.UtcNow);
-
-                var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
+               var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
                var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
       
                _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
                _dailyRewardView.ProgressBarImage.fillAmount = (int)(_dailyRewardView.TimeCooldown - (float)currentClaimCooldown.TotalSeconds) / _dailyRewardView.TimeCooldown;
-                Debug.Log(_dailyRewardView.TimeCooldown);
-                Debug.Log((float)currentClaimCooldown.TotalSeconds);
-                Debug.Log(_dailyRewardView.TimeCooldown - (float)currentClaimCooldown.TotalSeconds);
-                Debug.Log("________________________________________________________________________");
             }
        }
 
@@ -137,12 +134,6 @@ public class DailyRewardController: BaseController
 
         switch (reward.RewardType)
         {
-            //case RewardType.Wood:
-            //    CurrencyView.Instance.AddWood(reward.CountCurrency);
-            //    break;
-            //case RewardType.Diamond:
-            //    CurrencyView.Instance.AddWood(reward.CountCurrency);
-            //    break;
             case RewardType.Gold:
                 AddCredit(reward.CountCurrency);
                 break;
@@ -156,8 +147,6 @@ public class DailyRewardController: BaseController
 
     public void AddCredit(int value)
     {
-        if(CurrencyView.Instance!=null)
-            CurrencyView.Instance.AddGold(value);
         if(_credit !=null)
         _credit.Value += value;
     }

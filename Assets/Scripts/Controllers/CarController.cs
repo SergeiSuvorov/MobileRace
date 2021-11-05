@@ -10,10 +10,11 @@ public class CarController : BaseController, IAbilityActivator
     private readonly IUpgradableCar _car;
     private readonly float _abilityBonusTime = 5f;
     private float _cyrentAbilityBonusTime=0;
-    public CarController(IUpgradableCar car)
+    public CarController(IUpgradableCar car, SubscriptionProperty<float> moveDiff)
     {
         _car = car;
         _carView = LoadView();
+        _carView.Init(moveDiff, car.Speed.Value);
     }
 
     private void AbilityTimer()
