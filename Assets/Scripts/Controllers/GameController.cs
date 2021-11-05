@@ -19,7 +19,7 @@ public class GameController : BaseController
         var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
         AddController(inputGameController);
 
-        var carController = new CarController(profilePlayer.CurrentCar);
+        var carController = new CarController(profilePlayer.CurrentCar, rightMoveDiff);
         AddController(carController);
 
         var abilityViews = new ButtonsAbilityController(placeForUi);
