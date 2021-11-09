@@ -7,7 +7,7 @@ namespace Tools
 
         private string _ppKey;
 
-        public PlayerPrefsSubscriptionProperty(string ppKey, IConventor<T> conventor)
+        public PlayerPrefsSubscriptionProperty(string ppKey, IConventer<T> conventor)
         {
             _ppKey = ppKey;
             Debug.Log(PlayerPrefs.GetString(_ppKey));

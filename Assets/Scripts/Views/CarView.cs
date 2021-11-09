@@ -29,7 +29,7 @@ public class CarView : MonoBehaviour
     }
     private void WheelRotate(Transform wheelTransform, float speed, Sequence sequence)
     {
-        sequence.Kill();
+        sequence.Play();
         Vector3 vector3 = wheelTransform.rotation.eulerAngles;
        
         if (speed>0)
@@ -41,7 +41,7 @@ public class CarView : MonoBehaviour
         sequence.Append(wheelTransform.DOLocalRotate(vector3, rotateSpeed).SetEase(Ease.Linear));
         sequence.OnComplete(() =>
         {
-            WheelRotate(wheelTransform,speed,sequence);
+            sequence.SetLoops(-1);
         });
     }
 } 

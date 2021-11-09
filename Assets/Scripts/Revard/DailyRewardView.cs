@@ -27,6 +27,9 @@ public class DailyRewardView : PopupView
     private Transform _mountRootSlotsReward;
 
     [SerializeField]
+    private Transform _countCreditIcon;
+
+    [SerializeField]
     private ContainerSlotRewardView _containerSlotRewardView;
 
     [SerializeField]
@@ -45,6 +48,8 @@ public class DailyRewardView : PopupView
     public Button ResetButton => _resetButton;
 
     public Transform MountRootSlotsReward => _mountRootSlotsReward;
+
+    public Transform CountCreditIcon=> _countCreditIcon;
 
     public TMP_Text TimerNewReward => _timerNewReward;
 

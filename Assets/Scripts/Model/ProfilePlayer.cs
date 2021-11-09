@@ -10,13 +10,10 @@ namespace Model
         public ProfilePlayer(float speedCar, IAnalyticTools analytic)
         {
             CurrentState = new SubscriptionProperty<GameState>();
-            //CreditCount = new SubscriptionProperty<int>();
             CurrentCar = new Car(speedCar);
             Analytic = analytic;
-            //CreditCount.Value = PlayerPrefs.GetInt(CreditKey, 0);
-            IntConventor intConventor = new IntConventor();
+            IntConventer intConventor = new IntConventer();
             CreditCount = new PlayerPrefsSubscriptionProperty<int>(CreditKey, intConventor);
-            //CreditCount.SubscribeOnChange(onCreditCountChange);
         }
 
         private const string CreditKey = nameof(CreditKey);

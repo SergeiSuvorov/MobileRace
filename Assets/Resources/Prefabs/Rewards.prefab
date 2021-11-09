@@ -1183,6 +1183,7 @@ MonoBehaviour:
     CountCurrency: 80
   _timerNewReward: {fileID: 3994499143240147676}
   _mountRootSlotsReward: {fileID: 5629211834234852436}
+  _countCreditIcon: {fileID: 460663498934801247}
   _containerSlotRewardView: {fileID: 8551025656348397593, guid: 37bf757e72aab96429e7985dc0e25f78, type: 3}
   _getRewardButton: {fileID: 4275259403264903785}
   _resetButton: {fileID: 2146815740671401077}
@@ -1289,6 +1290,16 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d47692076582804479a5b00f3b8f9bce, type: 3}
+--- !u!224 &460663497656550308 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3592066937443166703, guid: d47692076582804479a5b00f3b8f9bce, type: 3}
+  m_PrefabInstance: {fileID: 4016382779623696971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &460663498934801247 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3592066938312341780, guid: d47692076582804479a5b00f3b8f9bce, type: 3}
+  m_PrefabInstance: {fileID: 4016382779623696971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &460663497257719453 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3592066937825164502, guid: d47692076582804479a5b00f3b8f9bce, type: 3}
@@ -1300,8 +1311,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &460663497656550308 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3592066937443166703, guid: d47692076582804479a5b00f3b8f9bce, type: 3}
-  m_PrefabInstance: {fileID: 4016382779623696971}
-  m_PrefabAsset: {fileID: 0}

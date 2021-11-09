@@ -23,7 +23,7 @@ namespace Ui
 
             TrailController trail = new TrailController();
             AddController(trail);
-            _view.Init(StartGame, ShowAddRequested, PurchaseRequasted, OpenGarage, OpenRewardWindow);
+            _view.Init(StartGame, ShowAddRequested, PurchaseRequasted, OpenGarage, OpenRewardWindow, OpenMiniGameWindow);
             _profilePlayer.CreditCount.SubscribeOnChange(OnCreditChange);
             _view.UpdateCredit(_profilePlayer.CreditCount.Value);
             
@@ -74,6 +74,11 @@ namespace Ui
         private void OpenRewardWindow()
         {
             _profilePlayer.CurrentState.Value = GameState.Reward;
+        }
+
+        private void OpenMiniGameWindow()
+        {
+            _profilePlayer.CurrentState.Value = GameState.MiniGame;
         }
     }
 }

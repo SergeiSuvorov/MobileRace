@@ -6,7 +6,8 @@
         Start,
         Garage,
         Game,
-        Reward
+        Reward,
+        MiniGame
     }
 }
 

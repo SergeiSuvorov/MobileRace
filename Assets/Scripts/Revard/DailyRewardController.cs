@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Model;
 using System;
 using System.Collections;
@@ -121,10 +122,14 @@ public class DailyRewardController: BaseController
 
    private void SubscribeButtons()
    {
-       _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
+       _dailyRewardView.GetRewardButton.onClick.AddListener(AccrueReward);
        _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
    }
 
+   private void AccrueReward()
+   {
+        StartRevardAnimation();
+    }
    private void ClaimReward()
    {
        if (!_isGetReward)
@@ -138,13 +143,30 @@ public class DailyRewardController: BaseController
                 AddCredit(reward.CountCurrency);
                 break;
         }
-
+        
         _dailyRewardView.TimeGetReward = DateTime.UtcNow;
        _dailyRewardView.CurrentSlotInActive = (_dailyRewardView.CurrentSlotInActive + 1) % _dailyRewardView.Rewards.Count;
 
        RefreshRewardsState();
    }
 
+    protected void StartRevardAnimation()
+    {
+        var image = _slots[_dailyRewardView.CurrentSlotInActive].IconCurrency;
+        var imageGO = UnityEngine.Object.Instantiate(image, image.transform.parent, false);
+        imageGO.transform.parent = _dailyRewardView.transform;
+ 
+
+        var sequence = DOTween.Sequence();
+
+        sequence.Insert(0.0f, imageGO.transform.DOMove(_dailyRewardView.CountCreditIcon.transform.position, 3));
+        sequence.OnComplete(() =>
+        {
+            UnityEngine.Object.Destroy(imageGO.gameObject);
+            ClaimReward();
+            sequence = null;
+        });
+    }
     public void AddCredit(int value)
     {
         if(_credit !=null)

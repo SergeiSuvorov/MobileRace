@@ -16,6 +16,8 @@ public class ContainerSlotRewardView : MonoBehaviour
     [SerializeField]
     private TMP_Text _countReward;
 
+    public Image IconCurrency=> _iconCurrency;
+
     public void SetData(Reward reward, int countDay, bool isSelected)
     {
         _iconCurrency.sprite = reward.Sprite;
