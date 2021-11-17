@@ -1,10 +1,13 @@
-﻿namespace Profile
+﻿namespace Model
 {
     public enum GameState
     {
         None,
         Start,
-        Game
+        Garage,
+        Game,
+        Reward,
+        MiniGame
     }
 }
 

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sprite
+  m_EditorClassIdentifier: 
+  m_GroupName: Sprite
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fe9a764b50313b641afe35863d8db1d6
+  m_SerializeEntries:
+  - m_GUID: a0aa6196d79b5db419e9a18c8927b98a
+    m_Address: Assets/Sprites/TruckWheelSprite.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: a0aa6196d79b5db419e9a18c8927b98a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: a0aa6196d79b5db419e9a18c8927b98a, type: 3}
+  - m_GUID: 90f91bf07d6aec14bb60e830bf64792c
+    m_Address: Assets/Sprites/TruckChassisSprite.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 90f91bf07d6aec14bb60e830bf64792c, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 90f91bf07d6aec14bb60e830bf64792c, type: 3}
+  - m_GUID: 24770088dedc9e84b97afaa1c612d506
+    m_Address: Assets/Sprites/SkyTileSprite.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 24770088dedc9e84b97afaa1c612d506, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 24770088dedc9e84b97afaa1c612d506, type: 3}
+  - m_GUID: dede5f4548992dd4ba1c9840a451ed31
+    m_Address: Assets/Sprites/SkySprite.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: dede5f4548992dd4ba1c9840a451ed31, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: dede5f4548992dd4ba1c9840a451ed31, type: 3}
+  - m_GUID: 3bb40c4bb20b72940ba2dd57ae30f88c
+    m_Address: Assets/Sprites/GrassSprite.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 3bb40c4bb20b72940ba2dd57ae30f88c, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 3bb40c4bb20b72940ba2dd57ae30f88c, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a01dedc620862824baeb474877ddca6f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1b39b02bf2ab9af45adbdf29ea504d52, type: 2}
+    - {fileID: 11400000, guid: f00e887d4099d9d4e979bbcf4662ca29, type: 2}

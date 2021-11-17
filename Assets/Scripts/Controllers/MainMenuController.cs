@@ -1,32 +1,85 @@
-﻿using Profile;
+﻿using Model;
+using Model.Shop;
 using Tools;
-using Ui;
+using Tools.Ads;
 using UnityEngine;
 
-public class MainMenuController : BaseController
+namespace Ui
 {
-    private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/mainMenu"};
-    private readonly ProfilePlayer _profilePlayer;
-    private readonly MainMenuView _view;
+    public class MainMenuController : BaseController
+    {
+        private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
+        private readonly ProfilePlayer _profilePlayer;
+        private readonly IAdsShower _adsShower;
+        private readonly MainMenuView _view;
+        private readonly IShop _shop;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
-    {
-        _profilePlayer = profilePlayer;
-        _view = LoadView(placeForUi);
-        _view.Init(StartGame);
-    }
-    
-    private MainMenuView LoadView(Transform placeForUi)
-    {
-        var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
-        AddGameObjects(objectView);
-        
-        return objectView.GetComponent<MainMenuView>();
-    }
+        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAdsShower adsShower, IShop shop)
+        {
+            _profilePlayer = profilePlayer;
+            _adsShower = adsShower;
+            _view = LoadView(placeForUi);
+            _shop = shop;
 
-    private void StartGame()
-    {
-        _profilePlayer.CurrentState.Value = GameState.Game;
+            TrailController trail = new TrailController();
+            AddController(trail);
+            _view.Init(StartGame, ShowAddRequested, PurchaseRequasted, OpenGarage, OpenRewardWindow, OpenMiniGameWindow);
+            _profilePlayer.CreditCount.SubscribeOnChange(OnCreditChange);
+            _view.UpdateCredit(_profilePlayer.CreditCount.Value);
+            
+        }
+
+        private BaseController ConfigureCursorTrail()
+        {
+            TrailController trailController = new TrailController();;
+            AddController(trailController);
+            return trailController;
+        }
+
+
+        private void OnCreditChange(int creditValue)
+        {
+            _view.UpdateCredit(_profilePlayer.CreditCount.Value);
+        }
+        private void PurchaseRequasted(string idProduct)
+        {
+            _shop.Buy(idProduct);
+        }
+        private MainMenuView LoadView(Transform placeForUi)
+        {
+            var objectView = Object.Instantiate(ResourceLoader.LoadPrefab(_viewPath), placeForUi, false);
+            AddGameObjects(objectView);
+
+            return objectView.GetComponent<MainMenuView>();
+        }
+        private void ShowAddRequested()
+        {
+            _adsShower.ShowVideo(OnVideoShowSuccess);
+        }
+
+        private void OnVideoShowSuccess()
+        {
+            // Add model reward
+        }
+        private void StartGame()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Game;
+        }
+
+        private void OpenGarage()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Garage;
+        }
+
+        private void OpenRewardWindow()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Reward;
+        }
+
+        private void OpenMiniGameWindow()
+        {
+            _profilePlayer.CurrentState.Value = GameState.MiniGame;
+        }
     }
 }
 
