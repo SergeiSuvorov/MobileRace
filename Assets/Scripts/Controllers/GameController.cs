@@ -79,7 +79,28 @@ public class GameController : BaseController
             }
         }
 
+        if (carView != null)
+        {
+           await LoadSprites(carView);
+        }
+        if (carView != null)
+        {
+           await LoadSprites(tapeBackgroundView);
+        }
+
+
         CreateController(carView, tapeBackgroundView);
+    }
+
+    private async Task LoadSprites(ISpiteAddressable spiteAddressable)
+    {
+        var _spriteAddressable = spiteAddressable.AddressableSprites;
+        foreach (var v in _spriteAddressable)
+        {
+            var operation = Addressables.LoadAssetAsync<Sprite>(v.TargetSprite).Task;
+            await operation;
+            v.TargetSpriteRenderer.sprite = operation.Result;
+        };
     }
 }
 

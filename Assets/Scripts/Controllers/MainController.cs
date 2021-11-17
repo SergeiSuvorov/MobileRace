@@ -27,7 +27,7 @@ public class MainController : BaseController
         _inventoryModel = new InventoryModel();
         _itemsRepository = new ItemsRepository(itemsConfig);
         _inventoryController = new InventoryController(_inventoryModel, _itemsRepository);
-        _currentController = _inventoryController;
+        _notificationController = new NotificationController();
         _inventoryController.ShowInventory();
         AddController(_inventoryController);
 
@@ -45,6 +45,7 @@ public class MainController : BaseController
     private readonly IShop _shop;
 
     private InventoryController _inventoryController;
+    private NotificationController _notificationController;
 
     private readonly List<ItemConfig> _itemsConfig;
     private readonly List<AbilityConfig> _abilitiesConfig;
@@ -67,6 +68,7 @@ public class MainController : BaseController
         _currentController?.Dispose();
         _purchaseController?.Dispose();
         _inventoryController?.Dispose();
+        _notificationController?.Dispose();
     }
     private void OnChangeGameState(GameState state)
     {
@@ -88,7 +90,7 @@ public class MainController : BaseController
                 _currentController = new GarageController(_upgradeItemsConfig, _profilePlayer, _placeForUi, _currentController.Dispose);
                 break;
             case GameState.Reward:
-                _currentController = new DailyRewardController(_placeForUi, _profilePlayer, _currentController.Dispose);
+                _currentController = new DailyRewardController(_placeForUi, _profilePlayer, _currentController.Dispose, _notificationController);
                 break;
             case GameState.MiniGame:
                 _currentController?.Dispose();
@@ -100,3 +102,4 @@ public class MainController : BaseController
         }
     }
 }
+

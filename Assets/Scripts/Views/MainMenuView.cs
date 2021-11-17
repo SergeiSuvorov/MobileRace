@@ -19,7 +19,6 @@ namespace Ui
         [SerializeField] private Button _garageButton;
         [SerializeField] private Button _rewardWindowButton;
         [SerializeField] private Button _minigameButton;
-
         private UnityAction<string> _purchaseReqested; 
         public void Init(UnityAction startGame, UnityAction rewardAdRequested,UnityAction<string> purchaseReqested, UnityAction openGarage, UnityAction openRewardWindow, UnityAction openMiniGameWindow)
         {
@@ -33,7 +32,6 @@ namespace Ui
             _rewardWindowButton?.onClick.AddListener(openRewardWindow);
 
             _minigameButton?.onClick.AddListener(openMiniGameWindow);
-
 
         }
 

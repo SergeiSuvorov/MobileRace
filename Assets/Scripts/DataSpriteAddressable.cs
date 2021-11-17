@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
@@ -6,5 +7,5 @@ using UnityEngine.UI;
 public class DataSpriteAddressable
 {
     public AssetReferenceSprite TargetSprite;
-    public Image TargetImage;
+    public SpriteRenderer TargetSpriteRenderer;
 }

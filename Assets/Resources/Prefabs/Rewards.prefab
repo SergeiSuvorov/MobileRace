@@ -1154,8 +1154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonClosePopup: {fileID: 7393418997604340363}
   _duration: 0.3
-  _timeCooldown: 7
-  _timeDeadline: 14
+  _timeCooldown: 300
+  _timeDeadline: 600
   _rewards:
   - RewardType: 2
     Sprite: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}

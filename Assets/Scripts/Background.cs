@@ -14,6 +14,9 @@ public class Background : MonoBehaviour
     public void Init()
     {
         _spriteRenderer=gameObject.GetComponent<SpriteRenderer>();
+
+        _spriteRenderer.size = new Vector2(35, 10);
+
         var border = _spriteRenderer.sprite.bounds.size.x * transform.localScale.x;
 
         _leftBorder = -border;

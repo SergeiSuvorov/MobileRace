@@ -14,10 +14,14 @@ public class DailyRewardController: BaseController
     private List<ContainerSlotRewardView> _slots;
     private SubscriptionProperty<int> _credit;
     private ProfilePlayer _profilePlayer;
+    private NotificationController _notificationController;
     private bool _isGetReward;
 
-    public DailyRewardController(Transform placeForUI, ProfilePlayer profilePlayer, UnityAction onPopUpShow)
+    public DailyRewardController(Transform placeForUI, ProfilePlayer profilePlayer, UnityAction onPopUpShow, NotificationController notificationController)
     {
+        _notificationController = notificationController;
+        _notificationController.DelleteAllNotification();
+
         _profilePlayer = profilePlayer;
         _credit = _profilePlayer.CreditCount;
         _dailyRewardView = LoadView(placeForUI);
@@ -27,6 +31,9 @@ public class DailyRewardController: BaseController
 
     public void onExit()
     {
+        var notificationCooldown = (int)_dailyRewardView.TimeCooldown/60 + 1;
+        _notificationController.CreateNotificationAndroid(notificationCooldown);
+
         _profilePlayer.CurrentState.Value = GameState.Start;
     }
 
@@ -107,7 +114,8 @@ public class DailyRewardController: BaseController
            {
                var nextClaimTime = _dailyRewardView.TimeGetReward.Value.AddSeconds(_dailyRewardView.TimeCooldown);
                var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
-               var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
+
+                var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
       
                _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
                _dailyRewardView.ProgressBarImage.fillAmount = (int)(_dailyRewardView.TimeCooldown - (float)currentClaimCooldown.TotalSeconds) / _dailyRewardView.TimeCooldown;

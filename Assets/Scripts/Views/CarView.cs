@@ -1,14 +1,18 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using Tools;
 using UnityEngine;
 
-public class CarView : MonoBehaviour
+public class CarView : MonoBehaviour, ISpiteAddressable
 {
-    [SerializeField] Transform _forwardWheel;
-    [SerializeField] Transform _backWheel;
+    [SerializeField] private Transform _forwardWheel;
+    [SerializeField] private Transform _backWheel;
+    [SerializeField] private List<DataSpriteAddressable> _addressableSprites;
     private Sequence _forwardWheelSequence;
     private Sequence _backWheelSequence;
     private float _maxSpeed;
+    public List<DataSpriteAddressable> AddressableSprites => _addressableSprites;
+
     public void Init(SubscriptionProperty<float> moveDiff, float maxSpeed)
     {
         moveDiff.SubscribeOnChange( WheelsRotate);
@@ -44,5 +48,9 @@ public class CarView : MonoBehaviour
             sequence.SetLoops(-1);
         });
     }
-} 
+}
+
+
+
+
 

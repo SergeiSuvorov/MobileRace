@@ -1,12 +1,15 @@
-﻿using Tools;
+﻿using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
-public class TapeBackgroundView : MonoBehaviour
+public class TapeBackgroundView : MonoBehaviour, ISpiteAddressable
 {
     [SerializeField] 
     private Background[] _backgrounds;
+    [SerializeField] private List<DataSpriteAddressable> _addressableSprites;
 
     private IReadOnlySubscriptionProperty<float> _diff;
+    public List<DataSpriteAddressable> AddressableSprites => _addressableSprites;
 
     public void Init(IReadOnlySubscriptionProperty<float> diff)
     {
