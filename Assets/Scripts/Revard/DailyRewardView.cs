@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using Tools;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class DailyRewardView : MonoBehaviour
+public class DailyRewardView : PopupView
 {
     private const string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
     private const string TimeGetRewardKey = nameof(TimeGetRewardKey);
@@ -85,10 +86,14 @@ public class DailyRewardView : MonoBehaviour
                 PlayerPrefs.DeleteKey(TimeGetRewardKey);
         }
     }
-    public void Init(SubscriptionProperty<int> credit)
+    public void Init(SubscriptionProperty<int> credit,UnityAction onPopUpShow, UnityAction onPopUpHide,UnityAction onExitClick)
     {
         _credit = credit;
         _credit.SubscribeOnChange(SetCurrentCreditCountText);
+
+        SettingPopup(onPopUpShow, onPopUpHide);
+        ShowPopup();
+        ButtonClosePopup? .onClick.AddListener(onExitClick);
     }
     private void SetCurrentCreditCountText(int credit)
     {
