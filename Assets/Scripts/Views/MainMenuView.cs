@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -9,14 +10,18 @@ namespace Ui
         [SerializeField]
         private Button _buttonStart;
         [SerializeField] private Button _showRewardedButton;
-        [SerializeField] private Text _creditText;
+
+        [SerializeField]
+        private TMP_Text _currentCountCredit;
 
         [SerializeField] private Button _creditPackButton;
         [SerializeField] private Button _bigCreditPackButton;
         [SerializeField] private Button _garageButton;
+        [SerializeField] private Button _rewardWindowButton;
+        [SerializeField] private Button _minigameButton;
 
         private UnityAction<string> _purchaseReqested; 
-        public void Init(UnityAction startGame, UnityAction rewardAdRequested,UnityAction<string> purchaseReqested, UnityAction openGarage)
+        public void Init(UnityAction startGame, UnityAction rewardAdRequested,UnityAction<string> purchaseReqested, UnityAction openGarage, UnityAction openRewardWindow, UnityAction openMiniGameWindow)
         {
             _buttonStart.onClick.AddListener(startGame);
             _showRewardedButton?.onClick.AddListener(rewardAdRequested);
@@ -25,6 +30,11 @@ namespace Ui
             _garageButton?.onClick.AddListener(openGarage);
             _creditPackButton?.onClick.AddListener(onCreditPackButtonClick);
             _bigCreditPackButton?.onClick.AddListener(onBigCreditPackButtonClick);
+            _rewardWindowButton?.onClick.AddListener(openRewardWindow);
+
+            _minigameButton?.onClick.AddListener(openMiniGameWindow);
+
+
         }
 
         private void onCreditPackButtonClick()
@@ -42,9 +52,9 @@ namespace Ui
 
         public void UpdateCredit(int creditValue)
         {
-            if(_creditText!=null)
+            if(_currentCountCredit!=null)
             {
-                _creditText.text = creditValue.ToString();
+               _currentCountCredit.text = creditValue.ToString();
             }
         }
         protected void OnDestroy()
@@ -54,6 +64,8 @@ namespace Ui
             _garageButton?.onClick.RemoveAllListeners();
             _creditPackButton?.onClick.RemoveAllListeners();
             _bigCreditPackButton?.onClick.RemoveAllListeners();
+            _rewardWindowButton?.onClick.RemoveAllListeners();
+            _minigameButton?.onClick.RemoveAllListeners();
         }
     }
 }

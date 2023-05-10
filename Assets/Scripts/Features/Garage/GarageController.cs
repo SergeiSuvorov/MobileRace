@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using Model;
 using Tools;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Garage
 {
@@ -22,7 +23,9 @@ namespace Garage
         private readonly ProfilePlayer _profilePlayer;  
 
         private GarageView _view;
-        public GarageController([NotNull] List<UpgradeItemConfig> upgradeItemConfigs, [NotNull] ProfilePlayer profilePlayer, [NotNull] Transform placeForUi)
+        UnityAction _onPopUpShow;
+        UnityAction _onPopUpHide;
+        public GarageController([NotNull] List<UpgradeItemConfig> upgradeItemConfigs, [NotNull] ProfilePlayer profilePlayer, [NotNull] Transform placeForUi, UnityAction onPopUpShow)
         {
             _profilePlayer = profilePlayer;
             _car = _profilePlayer.CurrentCar;
@@ -38,6 +41,9 @@ namespace Garage
             _inventoryModel = new InventoryModel();
 
             _upgradeItemConfigs = upgradeItemConfigs;
+
+            _onPopUpShow = onPopUpShow;
+            _onPopUpHide = this.Dispose;
             Enter();
         }
         private GarageView LoadView(Transform placeForUi)
@@ -51,7 +57,7 @@ namespace Garage
         public void Enter()
         {
             _view = LoadView(_placeForUi);
-            _view.Init(_upgradeItemConfigs);
+            _view.Init(_upgradeItemConfigs,_onPopUpShow, _onPopUpHide);
             Debug.Log($"Enter: car has speed : {_car.Speed}");
             Debug.Log($"Enter: has detail in garage: {_upgradeItemsRepository.Content.Count}");
             foreach (var equippedItem in _upgradeItemsRepository.Content)

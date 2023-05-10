@@ -14,7 +14,7 @@ public class MainController : BaseController
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer,
        List<ItemConfig> itemsConfig,
        List<AbilityConfig> abilitiesConfig,
-       List<UpgradeItemConfig> upgradeItemsConfig, 
+       List<UpgradeItemConfig> upgradeItemsConfig,
        IAdsShower adsShower,
        List<ShopProduct> shopProducts,
        IShop shop)
@@ -25,22 +25,20 @@ public class MainController : BaseController
         _abilitiesConfig = abilitiesConfig;
         _upgradeItemsConfig = upgradeItemsConfig;
         _inventoryModel = new InventoryModel();
-        Debug.Log(itemsConfig == null);
         _itemsRepository = new ItemsRepository(itemsConfig);
         _inventoryController = new InventoryController(_inventoryModel, _itemsRepository);
+        _currentController = _inventoryController;
         _inventoryController.ShowInventory();
         AddController(_inventoryController);
-        
+
         _adsShower = adsShower;
         _shop = shop;
         _purchaseController = new PurchaseController(shopProducts, profilePlayer, _shop);
         OnChangeGameState(_profilePlayer.CurrentState.Value);
-        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);        
+        profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
     }
 
-    private MainMenuController _mainMenuController;
-    private GameController _gameController;
-    private PurchaseController _purchaseController;
+    
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IAdsShower _adsShower;
@@ -54,45 +52,51 @@ public class MainController : BaseController
 
     private InventoryModel _inventoryModel;
     private ItemsRepository _itemsRepository;
-    private GarageController _garageController;
+    private PurchaseController _purchaseController;
+    private BaseController _currentController;
     protected override void OnDispose()
     {
-        _mainMenuController?.Dispose();
-        _gameController?.Dispose();
-        _garageController?.Dispose();
-        _purchaseController?.Dispose();
-        _inventoryController?.Dispose();
+        DisposeController();
         _profilePlayer.CurrentState.UnSubscriptionOnChange(OnChangeGameState);
+        
         base.OnDispose();
     }
 
+    private void DisposeController()
+    {
+        _currentController?.Dispose();
+        _purchaseController?.Dispose();
+        _inventoryController?.Dispose();
+    }
     private void OnChangeGameState(GameState state)
     {
         switch (state)
         {
             case GameState.None:
+                DisposeController();
                 break;
             case GameState.Start:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower, _shop);
-                _garageController?.Dispose();
-                _gameController?.Dispose();
+                _currentController?.Dispose();
+                _currentController = new MainMenuController(_placeForUi, _profilePlayer, _adsShower, _shop);
                 break;
             case GameState.Game:
+                _currentController?.Dispose();
                 _profilePlayer.Analytic.SendMessage("Game Start", new Dictionary<string, object>());
-                _garageController?.Dispose();
-                _mainMenuController?.Dispose();
-                _gameController = new GameController(_profilePlayer, _inventoryModel,_abilitiesConfig, _placeForUi);
+                _currentController = new GameController(_profilePlayer, _inventoryModel, _abilitiesConfig, _placeForUi);
                 break;
             case GameState.Garage:
-                _mainMenuController?.Dispose();
-                _gameController?.Dispose();
-                _garageController = new GarageController(_upgradeItemsConfig, _profilePlayer, _placeForUi);
+                _currentController = new GarageController(_upgradeItemsConfig, _profilePlayer, _placeForUi, _currentController.Dispose);
+                break;
+            case GameState.Reward:
+                _currentController = new DailyRewardController(_placeForUi, _profilePlayer, _currentController.Dispose);
+                break;
+            case GameState.MiniGame:
+                _currentController?.Dispose();
+                _currentController = new FightController(_placeForUi, _profilePlayer.CurrentState);
                 break;
             default:
-                _mainMenuController?.Dispose();
-                _gameController?.Dispose();
-                _garageController?.Dispose();
+                DisposeController();
                 break;
-        } 
+        }
     }
 }
