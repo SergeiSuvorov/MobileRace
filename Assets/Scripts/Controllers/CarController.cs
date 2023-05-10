@@ -1,7 +1,7 @@
 ﻿using Tools;
 using UnityEngine;
 
-public class CarController : BaseController
+public class CarController : BaseController, IAbilityActivator
 {
     private readonly ResourcePath _viewPath = new ResourcePath {PathResource = "Prefabs/Car"};
     private readonly CarView _carView;

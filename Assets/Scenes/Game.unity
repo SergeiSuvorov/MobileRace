@@ -484,17 +484,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 1903552}
   _unityAdsTools: {fileID: 1980575211}
+  _itemsConfig:
+  - {fileID: 11400000, guid: 1e95e01914157824cafc5656e4736644, type: 2}
+  - {fileID: 11400000, guid: 424d55aef6a2f1147a1c5ad5e0834e4f, type: 2}
+  - {fileID: 11400000, guid: 6936d6f2a1422f94db8fa7ecbd68f7d6, type: 2}
+  - {fileID: 11400000, guid: 6cad9766673ae464aa3edff6c8fd7129, type: 2}
+  - {fileID: 11400000, guid: 54766e6480fe1d441ad094e3c22bd16e, type: 2}
+  - {fileID: 11400000, guid: 04a5520ead55a3443acd21524a19a432, type: 2}
+  - {fileID: 11400000, guid: 5073546b5d3b4b14bad8e9561e537f34, type: 2}
+  _abilitiesConfig:
+  - {fileID: 11400000, guid: 4b1fea7ec7fd2ce459ca99853a937ebe, type: 2}
+  - {fileID: 11400000, guid: 6427ffdf12030ff42bcb466e8197a1ea, type: 2}
+  - {fileID: 11400000, guid: b186fa4e974a9124e8899f59634c9529, type: 2}
+  _upgradeItemsConfig:
+  - {fileID: 11400000, guid: 163d70eaec5b6c54282eb6ca911484ed, type: 2}
+  - {fileID: 11400000, guid: d88dd873b8f4fe243b607e78aff94fe0, type: 2}
+  - {fileID: 11400000, guid: 0c8513c29037af44b8a6324aaee2604b, type: 2}
   _shopProducts:
-  - Id: bigCreditPack
-    CurrentProductType: 0
-    Modification:
-      Type: 1
-      Value: 10
   - Id: creditPack
     CurrentProductType: 0
     Modification:
       Type: 1
       Value: 5
+  - Id: bigCreditPack
+    CurrentProductType: 0
+    Modification:
+      Type: 1
+      Value: 10
 --- !u!114 &1980575211
 MonoBehaviour:
   m_ObjectHideFlags: 0
