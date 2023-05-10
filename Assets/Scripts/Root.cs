@@ -37,7 +37,7 @@ public class Root : MonoBehaviour
         var shop = new ShopTools(_shopProducts);
         //_mainController = new MainController(_placeForUi, profilePlayer, _unityAdsTools, _shopProducts,shop);
         _mainController = new MainController(_placeForUi, profilePlayer, _itemsConfig.ToList(),
-            _abilitiesConfig.ToList(), _upgradeItemsConfig.ToList());
+            _abilitiesConfig.ToList(), _upgradeItemsConfig.ToList(), _unityAdsTools, _shopProducts, shop);
         analytic.SendMessage("Game Start", new Dictionary<string, object>());
     }
 
