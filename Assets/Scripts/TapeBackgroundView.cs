@@ -12,6 +12,11 @@ public class TapeBackgroundView : MonoBehaviour
     {
         _diff = diff;
         _diff.SubscribeOnChange(Move);
+
+        for(int i=0;i<_backgrounds.Length; i++)
+        {
+            _backgrounds[i].Init();
+        }
     }
 
     protected void OnDestroy()
