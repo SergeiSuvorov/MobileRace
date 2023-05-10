@@ -4,6 +4,7 @@ using Inventory;
 using Items;
 using JetBrains.Annotations;
 using Model;
+using Tools;
 using UnityEngine;
 
 namespace Garage
@@ -52,16 +53,16 @@ namespace Garage
             _view = LoadView(_placeForUi);
             _view.Init(_upgradeItemConfigs);
             Debug.Log($"Enter: car has speed : {_car.Speed}");
-            Debug.Log($"Enter: has detail in garage: {_upgradeItemsRepository.Items.Count}");
-            foreach (var equippedItem in _upgradeItemsRepository.Items)
+            Debug.Log($"Enter: has detail in garage: {_upgradeItemsRepository.Content.Count}");
+            foreach (var equippedItem in _upgradeItemsRepository.Content)
             {
                  Debug.Log(equippedItem.Value.Id + " "+ equippedItem.Value.Info.Title);
             }
 
-            Debug.Log($"Enter: has ubgarade detail in garage: {_upgradeHandlersRepository.UpgradeItems.Count}");
-            for (int i = 1; i <= _upgradeHandlersRepository.UpgradeItems.Count; i++)
+            Debug.Log($"Enter: has ubgarade detail in garage: {_upgradeHandlersRepository.Content.Count}");
+            for (int i = 1; i <= _upgradeHandlersRepository.Content.Count; i++)
             {
-                Debug.Log(_upgradeHandlersRepository.UpgradeItems[i].ToString());
+                Debug.Log(_upgradeHandlersRepository.Content[i].ToString());
             }
 
             _view.Apply = SetEquippedItems;
@@ -72,13 +73,13 @@ namespace Garage
             for (int i = 0; i < upgradeItemConfigs.Count; i++)
             {
                 var id = upgradeItemConfigs[i].Id;
-                _inventoryModel.EquipItem(_upgradeItemsRepository.Items[id]);
+                _inventoryModel.EquipItem(_upgradeItemsRepository.Content[id]);
             }
             Exit();
         }
         public void Exit()
         {
-            UpgradeCarWithEquippedItems(_car, _inventoryModel.GetEquippedItems(), _upgradeHandlersRepository.UpgradeItems);
+            UpgradeCarWithEquippedItems(_car, _inventoryModel.GetEquippedItems(), _upgradeHandlersRepository.Content);
             Debug.Log($"Exit: car has speed : {_car.Speed}");
             _profilePlayer.CurrentState.Value = GameState.Start;
         }

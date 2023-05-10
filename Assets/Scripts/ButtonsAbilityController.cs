@@ -2,6 +2,7 @@
 using Items;
 using System;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
 public class ButtonsAbilityController: BaseController, IAbilityCollectionView
@@ -46,6 +47,15 @@ public class ButtonsAbilityController: BaseController, IAbilityCollectionView
     {
         if (abilityItems.Count < 0)
             return;
+
+        if(abilityItems.Count> buttonsPool.Count)
+        {
+            while(abilityItems.Count >= buttonsPool.Count)
+            {
+                AddNewButtonInPool();
+            }
+        }
+
         for (int i = 0; i < buttonsPool.Count; i++)
         {
             if (i < abilityItems.Count)

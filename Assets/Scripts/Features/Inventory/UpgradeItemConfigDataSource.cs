@@ -8,7 +8,9 @@ namespace Inventory
         [SerializeField]
         private UpgradeItemConfig[] _itemConfigs;
         
-        private UpgradeItemConfig[] ItemConfigs => _itemConfigs;
+        public UpgradeItemConfig[] ItemConfigs => _itemConfigs;
     }
 }
+
+
 

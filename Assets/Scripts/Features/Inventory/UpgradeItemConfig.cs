@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Inventory
 {
     [CreateAssetMenu(fileName = "Upgrade item", menuName = "Upgrade item")]
-    public class UpgradeItemConfig : ScriptableObject
+    public class UpgradeItemConfig : ScriptableObject, IUnique<int>
     {
         [SerializeField]
         private ItemConfig _itemConfig;

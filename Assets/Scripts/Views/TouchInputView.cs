@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TouchInputView : GameInputView
 {
-    protected override void Move()
+    protected override void CheckInput()
     {
         if (Input.touchCount > 0)
         {
@@ -26,15 +26,13 @@ public class TouchInputView : GameInputView
 
             if (rightTouchCount > leftTouchCount)
             {
-                _curentSpeed = _curentSpeed < _speed ? (_curentSpeed + _moveAcceleration) : _speed;
+                AddAcceleration(true);
             }
             else if (rightTouchCount < leftTouchCount)
             {
-                _curentSpeed = _curentSpeed > -_speed ? (_curentSpeed - _moveAcceleration) : -_speed;
+                AddAcceleration(true);
             }
         }
-
-        base.Move();
     }
 }
 
