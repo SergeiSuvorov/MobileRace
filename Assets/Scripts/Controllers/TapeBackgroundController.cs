@@ -4,9 +4,9 @@ using UnityEngine;
 public class TapeBackgroundController : BaseController
 {
     public TapeBackgroundController(IReadOnlySubscriptionProperty<float> leftMove, 
-        IReadOnlySubscriptionProperty<float> rightMove)
+        IReadOnlySubscriptionProperty<float> rightMove,  TapeBackgroundView tapeBackgroundView)
     {
-        _view = LoadView();
+        _view = tapeBackgroundView;
         _diff = new SubscriptionProperty<float>();
         
         _leftMove = leftMove;
@@ -31,6 +31,7 @@ public class TapeBackgroundController : BaseController
         
         base.OnDispose();
     }
+
 
     private TapeBackgroundView LoadView()
     {
